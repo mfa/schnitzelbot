@@ -13,8 +13,11 @@ class StdOutListener(tweepy.streaming.StreamListener):
     def on_data(self, data):
         data = json.loads(data)
         print data.get('text')
-        api.create_favorite(data.get('id'))
-        api.create_friendship(data.get('user').get('id'))
+        try:
+            api.create_favorite(data.get('id'))
+            api.create_friendship(data.get('user').get('id'))
+        except:
+            pass
         return True
 
     def on_error(self, status):
