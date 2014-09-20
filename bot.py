@@ -1,10 +1,8 @@
+# set credentials in credentials.py
 from credentials import API_KEY, API_SECRET, CLIENT_TOKEN, CLIENT_SECRET
 
 import tweepy
 import json
-#from tweepy.streaming import StreamListener
-#from tweepy import OAuthHandler
-#from tweepy import Stream
 
 
 class StdOutListener(tweepy.streaming.StreamListener):
@@ -21,6 +19,7 @@ class StdOutListener(tweepy.streaming.StreamListener):
 
     def on_error(self, status):
         print status
+
 
 l = StdOutListener()
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
