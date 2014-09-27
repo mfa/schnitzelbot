@@ -12,10 +12,8 @@ class StdOutListener(tweepy.streaming.StreamListener):
     """
     def on_data(self, data):
         data = json.loads(data)
-        print data.get('text')
         api.create_favorite(data.get('id'))
-        if not api.exists_friendship(api.me().get('id'),
-                                     data.get('user').get('id')):
+        if data.get('user') in api.me().friends():
             api.create_friendship(data.get('user').get('id'))
         return True
 
