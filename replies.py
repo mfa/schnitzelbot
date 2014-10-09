@@ -7,7 +7,7 @@ replies_list = (
     'enjoy your meal!',
     u'bon appétit!',
     'Mahlzeit!',
-    'Schnitzel are great!',
-    'every schnitzel should come with a second serving!' 
+    'That is great!',
+    'every meal should come with a second serving!' 
 # add more if you like:
 )
