@@ -25,8 +25,8 @@ class StdOutListener(tweepy.streaming.StreamListener):
             api.create_favorite(data.get('id'))
         except:
             pass
-        if not data.get('user').get('id') in api.me().friends():
-            api.create_friendship(data.get('user').get('id'))
+        #if not data.get('user').get('id') in api.me().friends():
+        #    api.create_friendship(data.get('user').get('id'))
 
         # reply to some of the tweets
         if random.randint(0, 10) == 4:
