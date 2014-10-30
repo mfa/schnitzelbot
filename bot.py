@@ -19,7 +19,7 @@ class StdOutListener(tweepy.streaming.StreamListener):
 
     def on_data(self, data):
         data = json.loads(data)
-        print data.get('text')
+        print(data.get('text'))
         try:
             # FIXME: how to test if already faved?
             api.create_favorite(data.get('id'))
@@ -43,7 +43,7 @@ class StdOutListener(tweepy.streaming.StreamListener):
         return True
 
     def on_error(self, status):
-        print status
+        print(status)
 
 
 l = StdOutListener()
