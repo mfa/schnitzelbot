@@ -52,4 +52,4 @@ auth.set_access_token(CLIENT_TOKEN, CLIENT_SECRET)
 api = tweepy.API(auth)
 
 stream = tweepy.Stream(auth, l)
-stream.filter(track=['schnitzel', '#schnitzel', '#schnitzelbot', '@schnitzelfollow', '#schnitzelmuc', '#schnitzels', '#schnitzelffm', '#schnitzelminga'])
+stream.filter(track=['schnitzel', '#schnitzel', '#schnitzelbot', '@schnitzelfollow', '#hackerschnitzelcloud', '#schnitzelmuc', '#schnitzels', '#schnitzelffm', '#schnitzelminga'])
