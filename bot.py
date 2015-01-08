@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 
 # set credentials in credentials.py
-from credentials import API_KEY, API_SECRET, CLIENT_TOKEN, CLIENT_SECRET
+from credentials import (
+    API_KEY,
+    API_SECRET,
+    CLIENT_TOKEN,
+    CLIENT_SECRET,
+    USER_LIST,
+)
 
 import tweepy
 import random
@@ -19,14 +25,17 @@ class StdOutListener(tweepy.streaming.StreamListener):
 
     def on_data(self, data):
         data = json.loads(data)
+        print(data.get('user').get('screen_name')),
         print(data.get('text'))
         try:
             # FIXME: how to test if already faved?
             api.create_favorite(data.get('id'))
         except:
             pass
-        #if not data.get('user').get('id') in api.me().friends():
-        #    api.create_friendship(data.get('user').get('id'))
+        if data.get('user').get('screen_name') in USER_LIST:
+            # for now don't reply.
+            # will be added later
+            return True
 
         # reply to some of the tweets
         if random.randint(0, 10) == 4:
@@ -52,4 +61,5 @@ auth.set_access_token(CLIENT_TOKEN, CLIENT_SECRET)
 api = tweepy.API(auth)
 
 stream = tweepy.Stream(auth, l)
-stream.filter(track=['schnitzel', '#schnitzel', '#schnitzelbot', '@schnitzelfollow', '#hackerschnitzelcloud', '#schnitzelmuc', '#schnitzels', '#schnitzelffm', '#schnitzelminga'])
+stream.filter(track=['schnitzel', '#schnitzel', '#schnitzelbot', '@schnitzelfollow', '#hackerschnitzelcloud', '#schnitzelmuc', '#schnitzels', '#schnitzelffm', '#schnitzelminga'],
+              follow=USER_LIST)
