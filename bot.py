@@ -26,15 +26,14 @@ class StdOutListener(tweepy.streaming.StreamListener):
 
     def on_data(self, data):
         data = json.loads(data)
-        print(data.get('user').get('screen_name')),
-        print(data.get('user').get('id')),
+        print(data.get('user', {}).get('user_id')),
         print(data.get('text'))
         try:
             # FIXME: how to test if already faved?
             api.create_favorite(data.get('id'))
         except:
             pass
-        if data.get('user').get('id') in USER_LIST:
+        if data.get('user').get('user_id') in USER_LIST:
             # for now don't reply.
             # will be added later
             return True
