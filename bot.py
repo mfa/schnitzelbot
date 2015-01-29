@@ -28,6 +28,8 @@ class StdOutListener(tweepy.streaming.StreamListener):
         data = json.loads(data)
         print(data.get('user', {}).get('id')),
         print(data.get('text'))
+	if '@schnitzel' in data.get('text', '').lower():
+            return True
         try:
             # FIXME: how to test if already faved?
             api.create_favorite(data.get('id'))
@@ -62,5 +64,5 @@ auth.set_access_token(CLIENT_TOKEN, CLIENT_SECRET)
 api = tweepy.API(auth)
 
 stream = tweepy.Stream(auth, l)
-stream.filter(track=['#schnitzel', '#schnitzelbot', '@schnitzelfollow', '#hackerschnitzelcloud', '#schnitzelmuc', '#schnitzels', '#schnitzelffm', '#schnitzelminga'],
+stream.filter(track=['schnitzel', '#schnitzel', '#schnitzelbot', '@schnitzelfollow', '#hackerschnitzelcloud', '#schnitzelmuc', '#schnitzels', '#schnitzelffm', '#schnitzelminga'],
               follow=USER_LIST)
