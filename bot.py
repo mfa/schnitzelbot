@@ -8,6 +8,8 @@ from credentials import (
     CLIENT_SECRET,
     # user_list as ids (strings)
     USER_LIST,
+    # user_list that should be ignored
+    USER_BLACK_LIST,
 )
 
 import tweepy
@@ -30,6 +32,10 @@ class StdOutListener(tweepy.streaming.StreamListener):
         print(data.get('text'))
 	if '@schnitzel' in data.get('text', '').lower():
             return True
+        # ignore some users
+        if data.get('user', {}).get('id') in USER_BLACK_LIST:
+            return True
+
         try:
             # FIXME: how to test if already faved?
             api.create_favorite(data.get('id'))
